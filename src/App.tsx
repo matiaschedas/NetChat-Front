@@ -10,6 +10,7 @@ import MetaPanel from './Components/MetaPanel/MetaPanel';
 import { observer } from 'mobx-react-lite';
 import { RootStoreContext } from './Stores/rootStore';
 import { LoadingComponent } from './Components/LoadingComponent';
+import Footer from './Footer';
 
 const App = () =>{
   const rootStore = useContext(RootStoreContext)
@@ -35,22 +36,25 @@ const App = () =>{
 
   if(!appLoaded) return <LoadingComponent content = "Loading app..." /> 
   return (
-      
-      <Grid columns="equal" className="app" style={{ background: secundaryAppColor }}>
-        <>
-        {console.log(secundaryAppColor)}
-        <ColorPanel />
-        <SidePanel />
+      <>
+        <Grid columns="equal" className="app" style={{ background: secundaryAppColor }}>
+          <>
+          {console.log(secundaryAppColor)}
+          <ColorPanel />
+          <SidePanel />
 
-        <Grid.Column className="column" style={{ marginLeft: 320 }}>
-          { (isChannelLoaded && channels.length>0) && <Messages />}
-        </Grid.Column>
+          <Grid.Column className="column" style={{ marginLeft: 320 }}>
+            { (isChannelLoaded && channels.length>0) && <Messages />}
+          </Grid.Column>
 
-        <Grid.Column width={4}>
-          { (isChannelLoaded && channels.length>0) && <MetaPanel />}
-        </Grid.Column>
-        </>
-      </Grid>
+          <Grid.Column width={4}>
+            { (isChannelLoaded && channels.length>0) && <MetaPanel />}
+          </Grid.Column>
+          </>
+        </Grid>
+
+        <Footer />
+      </>
     )
  }
 
