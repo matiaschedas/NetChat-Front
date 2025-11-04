@@ -74,6 +74,8 @@ const Login = () => {
           /> 
           <Message>
                   Don't have an account? <Link to="/register">Register</Link>
+                  <br />
+                  Already have an account? <Link to="/login">Login</Link>
           </Message>
 
 

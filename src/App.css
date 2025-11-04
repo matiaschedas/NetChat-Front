@@ -117,3 +117,11 @@ body {
   height: 35px;
   transform: rotate(225deg);
 }
+
+.ui.dimmer.modals.visible {
+  z-index: 4001 !important;
+}
+
+.ui.modal {
+  z-index: 4002 !important;
+}
