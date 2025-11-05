@@ -6,27 +6,27 @@ import DirectMessages from './DirectMessages'
 import { observer } from 'mobx-react-lite'
 import Starred from './Starred'
 import { RootStoreContext } from '../../Stores/rootStore'
+import MetaPanel from '../MetaPanel/MetaPanel'
 
 interface SidePanelProps {
   visible: boolean;
-  onToggle?: React.Dispatch<React.SetStateAction<boolean>>;
+  mobile: boolean;
 }
 
 const MOBILE_BREAKPOINT = 1327;
 
-const SidePanel = ({ visible, onToggle }: SidePanelProps) => {
+const SidePanel = ({ visible, mobile }: SidePanelProps) => {
   const rootStore = useContext(RootStoreContext)
   const { isChannelLoaded, channels } = rootStore.channelStore
   const {appUserColors} = rootStore.userStore
   const { primaryAppColor } = appUserColors
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= MOBILE_BREAKPOINT);
 
-
+/*
    // Notificar al padre cuando cambia la visibilidad
   useEffect(() => {
     onToggle?.(visible);
-  }, [visible, onToggle]);
+  }, [visible, onToggle]);*/
 
   return(
    <>
@@ -61,6 +61,16 @@ const SidePanel = ({ visible, onToggle }: SidePanelProps) => {
             <DirectMessages />
           </Menu.Item>
         )}
+
+      {mobile && <div
+            style={{
+              margin: '1rem',
+              padding: '0.8rem',
+              borderRadius: '10px',
+              backgroundColor: 'rgba(255, 255, 255, 0.08)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+            }}
+          > <MetaPanel /> </div>}
       </Sidebar>
     </>
   );

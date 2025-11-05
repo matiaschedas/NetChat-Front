@@ -104,16 +104,16 @@ const App = () =>{
               transform: sidePanelVisible ? 'translateX(0)' : 'translateX(-100%)',
             }}
           >
-            <SidePanel visible={sidePanelVisible} />
+            <SidePanel visible={sidePanelVisible} mobile={isMobile} />
           </div>
         </>
       )}
 
       {/* En escritorio va dentro del Grid */}
-      <Grid columns="equal" className="app" style={{ background: secundaryAppColor, height: '100vh' }}>
+      <Grid columns="equal" className="app" style={{ background: secundaryAppColor, minHeight: '100vh',  height: '100vh', overflow: 'hidden',}}>
         {!isMobile && sidePanelVisible && (
           <Grid.Column width={3} style={{ padding: 0 }}>
-            <SidePanel visible={sidePanelVisible} />
+            <SidePanel visible={sidePanelVisible} mobile={isMobile} />
           </Grid.Column>
         )}
 
@@ -126,18 +126,18 @@ const App = () =>{
           }}
         >
           {isChannelLoaded && channels.length > 0 && (
-            <div style={{ height: '100%' }}>
+            <div style={{ height: 'calc(100% - 60px)' }}>
               <Messages />
             </div>
           )}
         </Grid.Column>
-
+        {!isMobile &&(
         <Grid.Column width={4} style={{ padding: 0, height: '100%' }}>
           {isChannelLoaded && channels.length > 0 && <MetaPanel />}
         </Grid.Column>
+        )}
+        <Footer />
       </Grid>
-
-      <Footer />
     </>
   )
  }

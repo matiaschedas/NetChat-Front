@@ -1,11 +1,22 @@
 html,
 body,
-.app{
+.app {
   height: 100vh;
   background: #eee;
-  padding: 1em;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* evita scroll global */
 }
 
+.ui.grid.app {
+  height: 100vh;
+  padding: 10px; /* espacio interno del layout */
+  box-sizing: border-box;
+}
+
+.ui.grid.app > .column {
+  padding: 10px !important; /* margen interno entre columnas */
+}
 .input__icon{
   border-top-right-radius: 0 !important;
   border-left-color: transparent !important;

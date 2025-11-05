@@ -273,10 +273,10 @@ const Messages = () => {
         <div>Cargando Usuario...</div>
       ): (
       <div style={{ position: 'relative' }}>
-        <div ref={messagesContainerRef}  style={{   maxHeight: '70vh',
+        <div ref={messagesContainerRef}  style={{   maxHeight: '65vh',
                                                     overflowY: 'auto', 
                                                 }}>
-          <Segment>
+          <Segment >
               <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 10 }}>
                 {charginPreviousMessages ? <Button size="small" onClick={handleLoadMoreMessages} loading={charginPreviousMessages}>
                   Charge previous messages
