@@ -11,6 +11,7 @@ import { observer } from 'mobx-react-lite';
 import { RootStoreContext } from './Stores/rootStore';
 import { LoadingComponent } from './Components/LoadingComponent';
 import Footer from './Footer';
+import ChannelForm from './Components/SidePanel/ChannelForm';
 
 const BREAKPOINT = 1327; 
 
@@ -19,7 +20,7 @@ const App = () =>{
   const { setAppLoaded, appLoaded, token } = rootStore.commonStore
   const { getUser, appUserColors } = rootStore.userStore
   const { createHubConnection, stopHubConnection } = rootStore.commonStore
-  const { isChannelLoaded, channels } = rootStore.channelStore
+  const { isChannelLoaded, channels, isModalVisible } = rootStore.channelStore
   const { secundaryAppColor } = appUserColors
     // Inicializar según tamaño actual
   const [sidePanelVisible, setSidePanelVisible] = useState(window.innerWidth > BREAKPOINT);
@@ -139,6 +140,7 @@ const App = () =>{
         )}
         <Footer />
       </Grid>
+      <ChannelForm />
     </>
   )
  }
