@@ -88,6 +88,7 @@ const App = () =>{
               inset: 0,
               background: 'rgba(0,0,0,0.3)',
               zIndex: 2400,
+              pointerEvents: document.querySelector('.ui.modal.visible') ? 'none': 'auto',
             }}
           />
           <div
