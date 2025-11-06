@@ -129,7 +129,7 @@ const App = () =>{
         >
           {isChannelLoaded && channels.length > 0 && (
             <div style={{ height: 'calc(100% - 60px)' }}>
-              <Messages />
+              <Messages isMobile={isMobile}/>
             </div>
           )}
         </Grid.Column>
