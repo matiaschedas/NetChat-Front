@@ -286,7 +286,7 @@ const Messages: React.FC<IProps> = ({ isMobile }) => {
                   Charge previous messages
                 </Button> : messageStore.noMorePreviousMessages && <span>No more previous messages</span>}
               </div>
-              <CommentGroup size='large' className="messages"  style={{ width: '100%'  }}>
+              <CommentGroup size='large' className="messages"   style={{ width: '100%', maxWidth: 'none' }}>
                 {/* Botón para cargar mensajes anteriores */}
                 {displayMessages(messageState.length > 0 ? messageState : messages)}
                 {hayTypings(typingsNotifications) && <div style={{ display: 'flex', alignItems: 'center' }}> <>{diplayTypingsAvatars(typingsNotifications)} <Typing/></></div>}
