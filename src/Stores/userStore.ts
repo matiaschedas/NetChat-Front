@@ -112,33 +112,58 @@ export default class UserStore {
       });
     }
     catch(err){
-      console.log("error en register")
-      console.log(err)
+      console.log("ERROR EN REGISTER:", err);
       if (!axios.isAxiosError(err)) {
         runInAction(() => {
           console.log('Ocurrió un error inesperado');
         });
       } 
-      const axiosError = err as AxiosError<any>;
-      if (axiosError.response?.status === 400 && axiosError.response.data?.errors) {
-         const errors = axiosError.response.data.errors;
+      
+       if (axios.isAxiosError(err)) {
+          const data = err.response?.data;
+          console.log("BACKEND ERROR:", data);
 
-        // Convertir las listas de errores en un único string
-        const mensajes = Object.entries(errors)
-          .map(([campo, mensajes]) => `${campo}: ${(mensajes as string[]).join(", ")}`)
-          .join("\n");
+         
+        if (data) {
+              let mensajes = "";
 
-        toast.error(mensajes, {
-          autoClose: 7000,
-          style: { whiteSpace: "pre-line" }, // para mostrar saltos de línea
-        });
-        return;
-      }
-      else {
-      // Error inesperado (no Axios)
-        toast.error('Ocurrió un error inesperado.');
+              // Caso 1: data.errors existe (FluentValidation o RestException)
+              if (data.errors && typeof data.errors === "object") {
+                const errores = data.errors;
+
+                mensajes = Object.entries(errores)
+                  .map(([campo, valor]) => {
+                    if (Array.isArray(valor)) {
+                      // Ej: Password: ["Debe tener mayúsculas"]
+                      return `${campo}: ${valor.join(", ")}`;
+                    } else {
+                      // Ej: Email: "Email already exists"
+                      return `${campo}: ${valor}`;
+                    }
+                  })
+                  .join("\n");
+              }
+
+              // Caso 2: data es un objeto plano: { Email: "Email already exists" }
+              else if (typeof data === "object") {
+                mensajes = Object.entries(data)
+                  .map(([campo, mensaje]) => `${campo}: ${mensaje}`)
+                  .join("\n");
+              }
+
+              // Mostrar toast si hay mensajes
+              if (mensajes.trim() !== "") {
+                toast.error(mensajes, {
+                  autoClose: 7000,
+                  style: { whiteSpace: "pre-line" }
+                });
+                return;
+          }
+        }
       }
     }
+    // Error genérico
+      toast.error("Ocurrió un error inesperado.");
   }
   @action setCurrentUser = async() => {
     try{
